@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+:root {
+  --text-color: #00204a;
+  --highlight-color: #bbe4e9;
+  --font-family: "Roboto", sans-serif;
+  --spacer: 1rem;
+  --gap: 5px;
+  --columns: 2;
+}
+
+body {
+  background: #eceef0;
+  color: var(--text-color);
+  font-family: var(--font-family);
+  height: 100%;
+}
+
+.fa-solid {
+  font-size: 20px;
+  padding: 5px 5px;
+}
+
+.footer {
+  flex-direction: column;
+  font-size: 14px;
+}
+.coded-by {
+  order: 2;
+  margin-top: 20px !important;
+}
+
+.email {
+  order: 1;
+  margin-top: 10px !important;
+}
+.social-block {
+  order: -1;
+}
+.social {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 18px;
+  margin: auto 0;
+  text-align: center;
+}
+.source-code {
+  color: var(--text-color);
+  text-align: center;
+}
+.source-code:hover {
+  color: var(--highlight-color);
+  transition: all 0.2ms ease-in-out;
+}
+
+.social:hover {
+  color: var(--highlight-color);
+  transition: all 0.3ms ease-in-out;
+}
+.social:active {
+  color: var(--highlight-color);
+}
+
+section {
+  margin-top: 10px;
+}
+
+.navbar {
+  background-color: white !important;
+}
+.search {
+  margin-top: 65px;
+  text-align: center;
+}
+.photo-item {
+  border-radius: 8px;
+  padding: 10px;
+  background-color: white;
+  text-align: center;
+  margin: 10px 5px;
+}
+.grid {
+  max-width: 60rem;
+  margin: 0 auto;
+  display: column;
+  columns: var(--columns);
+  gap: var(--gap);
+}
+.grid > * {
+  break-inside: avoid;
+  margin-bottom: var(--gap);
+}
+
+@supports (grid-template-rows: masonry) {
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(var(--columns), 2fr);
+    grid-template-rows: masonry;
+    grid-auto-flow: dense;
+    /* align-tracks: stretch; */
+  }
+
+  .grid > * {
+    margin-bottom: 0em;
+  }
+}
+
+.flow > * + * {
+  margin-top: var(--flow-space, var(--spacer));
+}
