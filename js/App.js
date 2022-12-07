@@ -1,59 +1,105 @@
 import GiphyAPI from "./GiphyAPI.js";
 import GiphyView from "./GiphyView.js";
-//import LoadingView from "./LoadingView.js";
-//import WatchingView from "./WatchingView.js";
+import { getPortion, findElementById } from "./helpers.js";
 
 export default class App {
   constructor(root) {
-    this.gifs = [];
-    this.selectedGIF = null;
-    //this.watchingView = new WatchingView(root, this._handlers());
+    this.isLoading = false;
     this.giphyView = new GiphyView(root, this._handlers());
-    // this.loadingView = new LoadingView(root);
-    this._getRandomImg();
-    //this._getRandomImg();
+    this.gifs = [];
+    this.offset = 0;
+    this.randomSearch = null;
+    this._refreshGifs();
   }
 
-  async _getRandomImg() {
+  async _refreshGifs() {
+    this.giphyView.showLoader(true);
     const search = await GiphyAPI.getRandomGifTitle();
-    this._refreshGifs(search);
+    this._setRandomSearch(search);
+
+    const gifs = await GiphyAPI.getGiphyResponse(this.randomSearch);
+    this.giphyView.showLoader(false);
+
+    this._updateOffset(gifs);
+    this._setGifs(gifs.data);
   }
 
-  async _refreshGifs(search) {
-    const gifs = await GiphyAPI.getGIFs(search);
-    console.log(gifs);
-    this._setGifs(gifs);
+  async _updateOffset(response) {
+    const offset = response.pagination.offset;
+    const count = response.pagination.count;
+    this._setOffset(offset + count);
   }
-  // _getRandomGifs() {
-  //   // const gifs = GiphyAPI.getRandomGif();
-  //   // this._setGifs(gifs);
-  // }
 
-  // _setActiveNote(note) {
-  //   this.activeNote = note;
-  //   this.view.updateActiveNote(note); //update text in form
-  // }
+  async _refreshSearch() {
+    this._setOffset(0);
+    this._refreshGifs();
+  }
 
   _setGifs(gifs) {
     this.gifs = gifs;
     this.giphyView.updateGIFList(gifs);
   }
 
+  _setOffset(offset) {
+    this.offset = offset;
+  }
+
+  async _setRandomSearch(search) {
+    this.randomSearch = search;
+  }
+
+  async _setMoreGifs() {
+    if (this.isLoading) {
+      return;
+    }
+    this.isLoading = true;
+    const newGifs = await GiphyAPI.getGiphyResponse(
+      this.randomSearch,
+      this.offset
+    );
+    this._updateOffset(newGifs);
+    const currentGifs = [...this.gifs, ...newGifs.data];
+    this._setGifs(currentGifs);
+    this.isLoading = false;
+  }
+
+  _selectGifById(gifId) {
+    const gifById = findElementById(this.gifs, gifId);
+    const portion = getPortion(this.gifs, gifById.id);
+    this._setSelectedPortion(portion);
+  }
+
+  _setSelectedPortion(portion) {
+    this.giphyView.updateSelectedGif(
+      portion.cur,
+      portion.previous,
+      portion.next,
+      this.gifs
+    );
+  }
+
   _handlers() {
     return {
-      // onGifClose: (noteId) => {
-      //   NotesAPI.deleteNote(noteId);
-      //   this._refreshActiveNotes();
-      //   this._refreshStats();
-      // },
-      // onGifSelect: (noteId) => {
-      //   NotesAPI.archiveNote(noteId);
-      //   this._refreshActiveNotes();
-      //   this._refreshArchiveNotes();
-      //   this._refreshStats();
-      // },
       onRefresh: () => {
-        this._getRandomImg();
+        this._refreshSearch();
+      },
+      onLoadMore: () => {
+        this._setMoreGifs();
+      },
+      onGifSelect: (gifId) => {
+        this._selectGifById(gifId);
+        this.giphyView.showResults(false);
+        this.giphyView.showView(true);
+      },
+      onClose: () => {
+        this.giphyView.showResults(true);
+        this.giphyView.showView(false);
+      },
+      onPrev: (gifId) => {
+        this._selectGifById(gifId);
+      },
+      onNext: (gifId) => {
+        this._selectGifById(gifId);
       },
     };
   }

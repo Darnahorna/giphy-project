@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 :root {
   --text-color: #00204a;
-  --highlight-color: #bbe4e9;
+  --highlight-color: #00c356;
   --font-family: "Roboto", sans-serif;
   --spacer: 1rem;
   --gap: 5px;
@@ -13,51 +13,6 @@ body {
   color: var(--text-color);
   font-family: var(--font-family);
   height: 100%;
-}
-
-.fa-solid {
-  font-size: 20px;
-  padding: 5px 5px;
-}
-
-.footer {
-  flex-direction: column;
-  font-size: 14px;
-}
-.coded-by {
-  order: 2;
-  margin-top: 20px !important;
-}
-
-.email {
-  order: 1;
-  margin-top: 10px !important;
-}
-.social-block {
-  order: -1;
-}
-.social {
-  color: var(--text-color);
-  text-decoration: none;
-  font-size: 18px;
-  margin: auto 0;
-  text-align: center;
-}
-.source-code {
-  color: var(--text-color);
-  text-align: center;
-}
-.source-code:hover {
-  color: var(--highlight-color);
-  transition: all 0.2ms ease-in-out;
-}
-
-.social:hover {
-  color: var(--highlight-color);
-  transition: all 0.3ms ease-in-out;
-}
-.social:active {
-  color: var(--highlight-color);
 }
 
 section {
@@ -106,4 +61,115 @@ section {
 
 .flow > * + * {
   margin-top: var(--flow-space, var(--spacer));
+}
+.loader-block {
+  background-color: #eceef0;
+}
+.flex-parent {
+  height: 500px;
+  justify-content: center;
+  align-items: center;
+}
+.loader {
+  animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.view {
+  margin-top: 80px;
+}
+.close-photo {
+  background-color: #a7abaf;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  margin: 10px;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.main-photo {
+  border-radius: 8px;
+  padding: 20px;
+  background-color: white;
+  text-align: center;
+  height: 330px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.previous-photo {
+  margin-left: 20px;
+}
+.next-photo {
+  margin-right: 20px;
+}
+.controller {
+  border-radius: 8px;
+  padding: 10px;
+  background-color: white;
+  text-align: center;
+  width: 80px;
+  height: 80px;
+}
+.controller:hover {
+  padding: 20px;
+}
+
+.photo-wrapper {
+  margin: 20px;
+}
+.bottom-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  margin-top: 50px;
+}
+.small-photo {
+  max-width: 100%;
+  max-height: 100%;
+}
+.big-photo {
+  max-width: 100%;
+  max-height: 100%;
+}
+.close-img {
+  width: 20px;
+  height: 20px;
+}
+.close-photo:hover {
+  background-color: #00c356;
+}
+
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+
+  .main-photo {
+    height: 430px;
+    width: 430px;
+  }
+  .previous-photo,
+  .next-photo {
+    width: 200px;
+    height: 200px;
+  }
+
+  .photo-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .bottom-section {
+    justify-content: space-evenly;
+  }
 }
