@@ -1,6 +1,6 @@
 import GiphyAPI from "./GiphyAPI.js";
 import GiphyView from "./GiphyView.js";
-import { getPortion, findElementById } from "./helpers.js";
+import { getPortion, findElementById, getFirst, getLast } from "./helpers.js";
 
 export default class App {
   constructor(root) {
@@ -49,10 +49,6 @@ export default class App {
   }
 
   async _setMoreGifs() {
-    if (this.isLoading) {
-      return;
-    }
-    this.isLoading = true;
     const newGifs = await GiphyAPI.getGiphyResponse(
       this.randomSearch,
       this.offset
@@ -60,19 +56,27 @@ export default class App {
     this._updateOffset(newGifs);
     const currentGifs = [...this.gifs, ...newGifs.data];
     this._setGifs(currentGifs);
-    this.isLoading = false;
   }
 
   _selectGifById(gifId) {
     const gifById = findElementById(this.gifs, gifId);
     const portion = getPortion(this.gifs, gifById.id);
+    const last = getFirst(this.gifs);
+    const first = getLast(this.gifs);
+
+    if (portion.prev === undefined) {
+      portion.prev = last;
+    }
+    if (portion.next === undefined) {
+      portion.next = first;
+    }
     this._setSelectedPortion(portion);
   }
 
   _setSelectedPortion(portion) {
     this.giphyView.updateSelectedGif(
       portion.cur,
-      portion.previous,
+      portion.prev,
       portion.next,
       this.gifs
     );

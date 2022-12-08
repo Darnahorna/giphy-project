@@ -59,7 +59,7 @@ export default class GiphyView {
         window.scrollY + window.innerHeight >=
         document.documentElement.scrollHeight
       ) {
-        onLoadMore();
+        this.onLoadMore();
       }
     });
   }
@@ -121,7 +121,7 @@ export default class GiphyView {
         </div>
       </div>
     </section>
-          `;
+        `;
   }
 
   updateSelectedGif(cur, prev, next, gifs) {
