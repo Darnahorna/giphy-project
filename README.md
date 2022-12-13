@@ -23,7 +23,7 @@ The code for this makes use of the following HTML, CSS, JS features: Local Stora
 
 ## Usage
 
-To use/test application, just click here - [ Giphy App Vanilla JS](https://codesandbox.io/s/silly-haslett-05s8yw).
+To use/test application, just click here - [ Giphy App Vanilla JS](https://vanilla-js-giphy-app.netlify.app/).
 
 ## Getting Started
 
