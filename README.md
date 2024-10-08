@@ -1,6 +1,5 @@
 # Giphy App Vanilla JS 🐶
 
-This SPA is part of the test task for CDON company.
 
 The code for this makes use of the following HTML, CSS, JS features: Local Storage, ES6 Import/Export Syntax, Classes, Arrow Functions, Static Methods, Callback Functions, Event Listeners, QuerySelector, GetElementById, Template Strings, Class List, CSS Psuedo-Classes, Flexbox and HTML5 Data Attributes.
 
