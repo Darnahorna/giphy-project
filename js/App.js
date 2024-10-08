@@ -14,7 +14,25 @@ export default class App {
 
   async _refreshGifs() {
     this.giphyView.showLoader(true);
-    const search = await GiphyAPI.getRandomGifTitle();
+    const searchTerms = [
+      "love",
+      "peace",
+      "freedom",
+      "sun",
+      "rain",
+      "mood",
+      "flower",
+      "cat",
+      "dog",
+      "happy",
+      "sad",
+      "angry",
+      "funny",
+      "cute",
+    ];
+    const randomIndex = Math.floor(Math.random() * searchTerms.length);
+    const search = searchTerms[randomIndex];
+    console.log(search);
     this._setRandomSearch(search);
 
     const gifs = await GiphyAPI.getGiphyResponse(this.randomSearch);

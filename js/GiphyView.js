@@ -15,7 +15,7 @@ export default class GiphyView {
     <nav class="navbar fixed-top bg-light">
       <div class="container-fluid">
         <a class="navbar-brand" href="#"
-          ><img src="images/cdon-logotype.svg" alt="logo" title="logo"
+          ><img src="https://fortune.com/img-assets/wp-content/uploads/2016/02/giphy-3.gif" width="100" alt="logo" title="logo"
         /></a>
         <div class="navbar-nav">
           <a class="nav-link active refresh-search" href=""
