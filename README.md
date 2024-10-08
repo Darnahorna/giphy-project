@@ -32,7 +32,7 @@ These instructions will get you a copy of the project up and running on your loc
 2. Clone a repository. The files from the remote repository will be downloaded to your computer.
 
 ```
-clone https://github.com/Darnahorna/cdon-giphy-project.git
+clone https://github.com/Darnahorna/giphy-project.git
 ```
 
 3. Now you can open the folder in any of IDE for editing code. If you use Visual Studio Code, I recommend that you install the Live Server extension and run it to test the application.
